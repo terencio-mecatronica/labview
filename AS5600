@@ -1,0 +1,38 @@
+#include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_AS5600.h>
+
+// Objeto para o sensor
+Adafruit_AS5600 as5600;
+
+void setup() {
+  Serial.begin(115200);
+
+  // Inicia a comunicação I2C (SDA = 21, SCL = 22)
+  Wire.begin();
+
+  // Tenta iniciar o sensor
+  if (!as5600.begin()) {
+    Serial.println("Nao foi possivel encontrar o sensor AS5600. Verifique a fiação!");
+    while (1); // Trava o código aqui se não encontrar o sensor
+  }
+
+  Serial.println("Sensor AS5600 encontrado! Gire o ima...");
+}
+
+void loop() {
+  // readAngle() retorna o valor "raw" de 12 bits (0-4095)
+  int anguloRaw = as5600.getAngle();
+
+  // Converte o valor raw para graus (0-360)
+  // A biblioteca fornece uma constante para isso
+  float anguloGraus = anguloRaw * (360.0 / 4096.0);
+
+  Serial.print("Valor Raw: ");
+  Serial.print(anguloRaw);
+  Serial.print(" | Angulo em Graus: ");
+  Serial.print(anguloGraus);
+  Serial.println("°");
+
+  delay(100); //
+}
