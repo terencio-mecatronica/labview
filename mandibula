@@ -1,0 +1,19 @@
+#include <Arduino.h>
+
+void setup() {
+  Serial.begin(115200); // Mesma velocidade do LabVIEW
+  Serial.setTimeout(20);
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    // Lê o texto que o LabVIEW mandou (ex: "45\n")
+    String recebido = Serial.readStringUntil('\n');
+    
+    // (Opcional) Aqui você converteria para int para mover um motor
+    // int angulo = recebido.toInt();
+
+    // Manda de volta o MESMO valor para o LabVIEW confirmar
+    Serial.println(recebido); 
+  }
+}
