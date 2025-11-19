@@ -2,37 +2,43 @@
 #include <Wire.h>
 #include <Adafruit_AS5600.h>
 
-// Objeto para o sensor
+// Usa o mesmo objeto do seu código original
 Adafruit_AS5600 as5600;
 
 void setup() {
   Serial.begin(115200);
-
-  // Inicia a comunicação I2C (SDA = 21, SCL = 22)
+  
+  // Inicia I2C
   Wire.begin();
 
-  // Tenta iniciar o sensor
+  // Tenta iniciar o sensor (igual ao seu original)
   if (!as5600.begin()) {
-    Serial.println("Nao foi possivel encontrar o sensor AS5600. Verifique a fiação!");
-    while (1); // Trava o código aqui se não encontrar o sensor
+    Serial.println("Erro: Sensor AS5600 nao encontrado!");
+    while (1); // Trava se der erro
   }
-
-  Serial.println("Sensor AS5600 encontrado! Gire o ima...");
 }
 
 void loop() {
-  // readAngle() retorna o valor "raw" de 12 bits (0-4095)
-  int anguloRaw = as5600.getAngle();
+  // LÓGICA DE COMUNICAÇÃO COM LABVIEW
+  // Só executa se o LabVIEW chamar (mandar algo pela serial)
+  if (Serial.available() > 0) {
+    
+    // 1. Limpa o buffer (descarta o comando que o LabVIEW mandou)
+    while(Serial.available() > 0) {
+      Serial.read(); 
+    }
 
-  // Converte o valor raw para graus (0-360)
-  // A biblioteca fornece uma constante para isso
-  float anguloGraus = anguloRaw * (360.0 / 4096.0);
+    // 2. Lê o valor Raw (0-4095)
+    // TENTATIVA 1: Usando o comando do seu código original
+    // Se der erro de "no member named getAngle", troque por "readAngle()"
+    int anguloRaw = as5600.getAngle(); 
 
-  Serial.print("Valor Raw: ");
-  Serial.print(anguloRaw);
-  Serial.print(" | Angulo em Graus: ");
-  Serial.print(anguloGraus);
-  Serial.println("°");
+    // 3. Converte para Graus (Fórmula do seu código original)
+    float anguloGraus = anguloRaw * (360.0 / 4096.0);
 
-  delay(100); //
+    // 4. Envia para o LabVIEW
+    // IMPORTANTE: O LabVIEW só quer o NÚMERO. 
+    // Removemos os textos "Valor Raw:" e "Graus:" que tinham antes.
+    Serial.println(anguloGraus, 0); // O ",0" envia o número inteiro (arredondado)
+  }
 }
