@@ -92,8 +92,8 @@ O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibu
 
 Os códigos fonte completo do projeto está disponível no arquivo `.vi` (LabVIEW) neste repositório e no arquivo  `.cpp` (Python).
 
-**Arquivo Principal:** `as56007.vi` (ou o nome exato que você salvou)
-**Arquivo Principal:** `as56007.cpp` (ou o nome exato que você salvou)
+**Arquivo Principal:** `as56007.vi`
+**Arquivo Principal:** `as56007.cpp`
 
 ### Pré-requisitos
 Para executar o software, você precisará de:
