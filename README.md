@@ -68,7 +68,7 @@ Além da posição, o sistema calcula as derivadas físicas para análise clíni
 ### Painel Frontal
 O painel permite a visualização da simulação 3D e dos gráficos de cinemática (Abertura, Velocidade e Aceleração).
 
-![Painel Frontal LabVIEW](Front Panel.png)
+![Painel Frontal LabVIEW](Front_Panel.png)
 
 ### Diagrama de Blocos
 Lógica de programação G-Code demonstrando aquisição VISA, processamento matemático e escrita de arquivos.
@@ -79,9 +79,9 @@ Lógica de programação G-Code demonstrando aquisição VISA, processamento mat
 
 O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibular. Abaixo, apresenta-se a resposta típica do sistema durante um ciclo completo de abertura e fechamento.
 
-![Gráfico da Abertura Linar](Gráfico da Abertura Linear.png)
-![Gráfico da Abertura Linar](Gráfico da Aceleracao.png)
-![Gráfico da Abertura Linar](Gráfico da Velocidade.png)
+![Gráfico da Abertura Linar](Gráfico_da_Abertura_Linear.png)
+![Gráfico da Abertura Linar](Gráfico_da_Aceleracao.png)
+![Gráfico da Abertura Linar](Gráfico_da_Velocidade.png)
 
 **Análise dos Gráficos:**
 1.  **Abertura (Posição):** Observa-se o movimento linear suave de abertura até o pico máximo e o retorno à posição de repouso.
