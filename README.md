@@ -113,6 +113,12 @@ Para executar o software, você precisará de:
 3.  Realize o upload do código.
 4.  Se abrir o monitor, feche o compilador antes de executar no LabVIEW.
 
+### 🧹 Script de Limpeza Automática (Google Sheets)
+
+Para facilitar a realização de múltiplos testes sequenciais, o projeto utiliza um script `.gs` no Google Sheets que limpa os dados antigos preservando o cabeçalho e a formatação dos gráficos.
+
+**Código do Script (`as56007.gs`):**
+
 ## ✅ Conclusão
 
 O projeto resultou em um sistema funcional e estável. A utilização do LabVIEW possibilitou a visualização em tempo real e o tratamento matemático complexo dos sinais. O hardware demonstrou estabilidade na leitura angular sem contato, eliminando ruídos mecânicos. O sistema entrega uma solução completa, desde a captura física até a geração de relatórios CSV.
