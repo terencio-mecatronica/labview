@@ -1,16 +1,8 @@
-function doGet(e) {
-  var nomeDaAba = e.parameter.nome; 
-  
-  if (!nomeDaAba) {
-    return ContentService.createTextOutput("Erro: Faltou o nome da aba!");
-  }
-
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  
-  try {
-    ss.insertSheet(nomeDaAba);
-    return ContentService.createTextOutput("Sucesso: Aba '" + nomeDaAba + "' criada!");
-  } catch (err) {
-    return ContentService.createTextOutput("Erro: Talvez a aba já exista.");
+function limparDados() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  // Limpa da linha 2 até o final, nas colunas A, B, C e D
+  var ultimaLinha = sheet.getLastRow();
+  if (ultimaLinha > 1) {
+    sheet.getRange(2, 1, ultimaLinha - 1, 4).clearContent();
   }
 }
