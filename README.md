@@ -75,6 +75,18 @@ Lógica de programação G-Code demonstrando aquisição VISA, processamento mat
 ![Diagrama de Blocos](caminho/para/sua/imagem_diagrama_blocos.png)
 *(o print do Diagrama de Blocos)*
 
+### 📈 Curvas Típicas de Operação
+
+O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibular. Abaixo, apresenta-se a resposta típica do sistema durante um ciclo completo de abertura e fechamento.
+
+![Gráficos de Operação](caminho/para/sua/imagem_graficos_spikes.png)
+*(Insira aqui o print dos 3 gráficos: Abertura, Velocidade e Aceleração)*
+
+**Análise dos Gráficos:**
+1.  **Abertura (Posição):** Observa-se o movimento linear suave de abertura até o pico máximo e o retorno à posição de repouso.
+2.  **Velocidade:** Apresenta patamares constantes durante o movimento contínuo, indicando estabilidade na execução.
+3.  **Aceleração:** O gráfico exibe picos característicos ("spikes") nos momentos de início e fim do movimento. Estes impulsos correspondem fisicamente à quebra de inércia e à inversão do sentido do movimento, validando a precisão da derivada numérica calculada pelo algoritmo.
+
 ## ✅ Conclusão
 
 O projeto resultou em um sistema funcional e estável. A utilização do LabVIEW possibilitou a visualização em tempo real e o tratamento matemático complexo dos sinais. O hardware demonstrou estabilidade na leitura angular sem contato, eliminando ruídos mecânicos. O sistema entrega uma solução completa, desde a captura física até a geração de relatórios CSV.
