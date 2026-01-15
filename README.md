@@ -88,6 +88,31 @@ O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibu
 2.  **Velocidade:** Apresenta patamares constantes durante o movimento contínuo, indicando estabilidade na execução.
 3.  **Aceleração:** O gráfico exibe picos característicos ("spikes") nos momentos de início e fim do movimento. Estes impulsos correspondem fisicamente à quebra de inércia e à inversão do sentido do movimento, validando a precisão da derivada numérica calculada pelo algoritmo.
 
+## 📂 Códigos Fonte e Execução
+
+Os códigos fonte completo do projeto está disponível no arquivo `.vi` (LabVIEW) neste repositório e no arquivo  `.cpp` (Python).
+
+**Arquivo Principal:** `as56007.vi` (ou o nome exato que você salvou)
+**Arquivo Principal:** `as56007.cpp` (ou o nome exato que você salvou)
+
+### Pré-requisitos
+Para executar o software, você precisará de:
+* **LabVIEW**.
+* **VS Code ou qualquer compilador**.
+
+### Como utilizar LabVIEW
+1.  Faça o download do arquivo `.vi`.
+2.  Conecte o hardware (ESP32) à porta USB.
+3.  Abra o arquivo no LabVIEW.
+4.  No painel frontal, selecione a **Porta COM** correta no menu "VISA resource name".
+5.  Clique na seta branca **Run** (Executar) na barra superior.
+
+### Como utilizar ESP32
+1.  Faça o download do arquivo `.cpp`.
+2.  Abra o compilador.
+3.  Realize o upload do código.
+4.  Se abrir o monitor, feche o compilador antes de executar no LabVIEW.
+
 ## ✅ Conclusão
 
 O projeto resultou em um sistema funcional e estável. A utilização do LabVIEW possibilitou a visualização em tempo real e o tratamento matemático complexo dos sinais. O hardware demonstrou estabilidade na leitura angular sem contato, eliminando ruídos mecânicos. O sistema entrega uma solução completa, desde a captura física até a geração de relatórios CSV.
