@@ -6,11 +6,11 @@
 
 Adafruit_AS5600 as5600;
 
-const char* ssid = "tp_link_5200_2_4";
-const char* password = "9ENAE674DVSG672HJBS3";
+const char* ssid = "COLOQUEOSEUWIFI";
+const char* password = "COLOQUEASUASENHA";
 
-// URL DO GOOGLE SCRIPT
-String googleURL = "https://script.google.com/macros/s/AKfycbxPFYg00fvvAbUUsy8tx6XG_OOFUW3J2lW9NdzLnJ7kZVU33qLcn1Bt01HwZcvl6yX3/exec?";
+// URL DO GOOGLE SCRIPT QUE FOI CRIADO
+String googleURL = "COLOQUEOLINKCRIADODOGOOGLESHEET?";
 
 //VARIÁVEIS GLOBAIS
 unsigned long ultimoEnvio = 0; 
