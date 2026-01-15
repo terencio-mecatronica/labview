@@ -58,7 +58,7 @@ void loop() {
   }
 
   //PARTE 3: GOOGLE SHEETS
-  if (millis() - ultimoEnvio > 200) { 
+  if (millis() - ultimoEnvio > 2000) { 
      if(WiFi.status() == WL_CONNECTED){
         HTTPClient http;
         // Se o sensor estiver desconectado, envia 0 para o Google
