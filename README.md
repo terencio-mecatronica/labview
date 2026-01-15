@@ -73,15 +73,15 @@ O painel permite a visualização da simulação 3D e dos gráficos de cinemáti
 ### Diagrama de Blocos
 Lógica de programação G-Code demonstrando aquisição VISA, processamento matemático e escrita de arquivos.
 
-![Diagrama de Blocos](Diagram Block.png)
+![Diagrama de Blocos](Diagram%20Block.png)
 
 ### 📈 Curvas Típicas de Operação
 
 O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibular. Abaixo, apresenta-se a resposta típica do sistema durante um ciclo completo de abertura e fechamento.
 
 ![Gráfico da Abertura Linar](Gráfico%20da%20Abertura%20Linear.png)
+![Gráfico da Abertura Velocidade](Gráfico%20da%20Velocidade.png)
 ![Gráfico da Abertura Linar](Gráfico%20da%20Aceleracao.png)
-![Gráfico da Abertura Linar](Gráfico%20da%20Velocidade.png)
 
 **Análise dos Gráficos:**
 1.  **Abertura (Posição):** Observa-se o movimento linear suave de abertura até o pico máximo e o retorno à posição de repouso.
@@ -90,7 +90,7 @@ O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibu
 
 ## 📂 Códigos Fonte e Execução
 
-Os códigos fonte completo do projeto está disponível no arquivo `.vi` (LabVIEW) neste repositório e no arquivo  `.cpp` (Python).
+Os códigos fonte completo do projeto está disponível no arquivo `.vi` (LabVIEW) neste repositório e no arquivo  `.cpp` (c++).
 
 **Arquivo Principal:** `as56007.vi`
 **Arquivo Principal:** `as56007.cpp`
