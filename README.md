@@ -34,6 +34,8 @@ O objetivo principal é desenvolver um sistema de instrumentação virtual de ba
 
 ### Hardware
 
+![AS5600](ESP32.jpeg)
+
 | Parâmetro | Especificação |
 | :--- | :--- |
 | **Microcontrolador** | ESP32 (Espressif Systems) - Dual Core 240MHz |
@@ -66,21 +68,20 @@ Além da posição, o sistema calcula as derivadas físicas para análise clíni
 ### Painel Frontal
 O painel permite a visualização da simulação 3D e dos gráficos de cinemática (Abertura, Velocidade e Aceleração).
 
-![Painel Frontal LabVIEW](caminho/para/sua/imagem_painel_frontal.png)
-*(o print do Front Panel)*
+![Painel Frontal LabVIEW](Front Panel.png)
 
 ### Diagrama de Blocos
 Lógica de programação G-Code demonstrando aquisição VISA, processamento matemático e escrita de arquivos.
 
-![Diagrama de Blocos](caminho/para/sua/imagem_diagrama_blocos.png)
-*(o print do Diagrama de Blocos)*
+![Diagrama de Blocos](Diagram Block.png)
 
 ### 📈 Curvas Típicas de Operação
 
 O sistema é capaz de capturar detalhadamente a cinemática do movimento mandibular. Abaixo, apresenta-se a resposta típica do sistema durante um ciclo completo de abertura e fechamento.
 
-![Gráficos de Operação](caminho/para/sua/imagem_graficos_spikes.png)
-*(Insira aqui o print dos 3 gráficos: Abertura, Velocidade e Aceleração)*
+![Gráfico da Abertura Linar](Gráfico da Abertura Linear.png)
+![Gráfico da Abertura Linar](Gráfico da Aceleracao.png)
+![Gráfico da Abertura Linar](Gráfico da Velocidade.png)
 
 **Análise dos Gráficos:**
 1.  **Abertura (Posição):** Observa-se o movimento linear suave de abertura até o pico máximo e o retorno à posição de repouso.
