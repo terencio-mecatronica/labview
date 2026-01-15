@@ -113,11 +113,50 @@ Para executar o software, você precisará de:
 3.  Realize o upload do código.
 4.  Se abrir o monitor, feche o compilador antes de executar no LabVIEW.
 
-### 🧹 Script de Limpeza Automática (Google Sheets)
+## ☁️ Integração IoT com Google Sheets
 
-Para facilitar a realização de múltiplos testes sequenciais, o projeto utiliza um script `.gs` no Google Sheets que limpa os dados antigos preservando o cabeçalho e a formatação dos gráficos.
+O projeto implementa uma arquitetura IoT completa, permitindo que o LabVIEW envie dados diretamente para a nuvem. Foram desenvolvidos dois scripts em **Google Apps Script** para gerenciar esse fluxo.
 
-**Código do Script (`as56007.gs`):**
+Os arquivos estão disponíveis na pasta `scripts` deste repositório:
+
+### 1. Engine de Integração (`script1.gs`)
+* **Função:** Atua como o **Web App Principal (API)**.
+* **Lógica Híbrida:** Este script centraliza toda a comunicação externa. Ele é capaz de interpretar diferentes comandos enviados pelo LabVIEW via parâmetros URL:
+    * `acao=criar`: Cria uma nova aba na planilha com o nome do paciente, garantindo que os dados não se misturem.
+    * `acao=gravar`: Recebe os dados de telemetria (Tempo, Abertura, Velocidade, Aceleração) e os insere na próxima linha vazia (*appendRow*) da aba correspondente.
+* **Configuração:** Deve ser implantado como Web App ("Executar como eu", "Acesso: Qualquer pessoa") para gerar a URL de integração usada no LabVIEW.
+
+### 2. Ferramenta de Reset (`script2.gs`)
+* **Função:** Script utilitário para **Limpeza de Dados**.
+* **Utilidade:** Permite ao operador limpar instantaneamente os dados de um ensaio anterior na planilha ativa, preservando cabeçalhos e gráficos.
+* **Uso:** Ideal para a fase de testes e calibração, acionado por um botão "Limpar" desenhado na própria interface do Google Sheets.
+
+---
+
+### ⚙️ Como Configurar (Deploy)
+
+Para conectar o LabVIEW à planilha:
+
+1.  Abra o arquivo `script1.gs` no editor de scripts do Google Sheets.
+2.  Clique em **Implantar** > **Nova implantação**.
+3.  Selecione tipo **"App da Web"**.
+4.  Defina o acesso como **"Qualquer pessoa"**.
+5.  Copie a **URL gerada** e cole no bloco de configuração do LabVIEW (Diagrama de Blocos).
+
+### 🔘 Configuração do Botão de Limpeza (Script 2)
+
+Diferente do Script 1, o **Script de Limpeza** não precisa ser publicado como Web App. Ele roda localmente dentro da planilha através de um botão desenhado na interface.
+
+**Passo a passo para criar o botão:**
+
+1.  No Google Sheets, vá no menu **Inserir** > **Desenho**.
+2.  Utilize as ferramentas de forma para desenhar um botão (ex: um retângulo escrito "LIMPAR").
+3.  Clique em **Salvar e Fechar**. O desenho aparecerá na planilha.
+4.  Clique no desenho (se necessário, clique com o botão direito para selecionar).
+5.  Clique nos **três pontinhos verticais** no canto do desenho e selecione **Transferir script** (ou *Assign script*).
+6.  Digite o nome exato da função que está dentro do arquivo `script2.gs` (ex: `limparDados`) e clique em OK.
+
+**Nota:** Na primeira vez que você clicar no botão, o Google pedirá permissão para executar o script. Basta autorizar e o botão funcionará sempre que clicado.
 
 ## ✅ Conclusão
 
