@@ -1,44 +1,75 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <Adafruit_AS5600.h>
+#include <WiFi.h>
+#include <HTTPClient.h>
 
-// Usa o mesmo objeto do seu código original
 Adafruit_AS5600 as5600;
+
+const char* ssid = "tp_link_5200_2_4";
+const char* password = "9ENAE674DVSG672HJBS3";
+
+// URL DO GOOGLE SCRIPT
+String googleURL = "https://script.google.com/macros/s/AKfycbxPFYg00fvvAbUUsy8tx6XG_OOFUW3J2lW9NdzLnJ7kZVU33qLcn1Bt01HwZcvl6yX3/exec?";
+
+//VARIÁVEIS GLOBAIS
+unsigned long ultimoEnvio = 0; 
+float anguloAtual = 0.0;       
 
 void setup() {
   Serial.begin(115200);
-  
-  // Inicia I2C
   Wire.begin();
 
-  // Tenta iniciar o sensor (igual ao seu original)
-  if (!as5600.begin()) {
-    Serial.println("Erro: Sensor AS5600 nao encontrado!");
-    while (1); // Trava se der erro
-  }
+  WiFi.begin(ssid, password);
+
+  as5600.begin(); 
 }
 
 void loop() {
-  // LÓGICA DE COMUNICAÇÃO COM LABVIEW
-  // Só executa se o LabVIEW chamar (mandar algo pela serial)
-  if (Serial.available() > 0) {
+  //PARTE 1: CHECAGEM
+  //VERIFICAÇÃO DE SEGURANÇA
+  // Antes de ler, perguntamos: "Tem alguém no endereço 0x36?"
+  Wire.beginTransmission(0x36);
+  byte erro = Wire.endTransmission();
+
+  if (erro == 0) {
+    // SENSOR CONECTADO
+    float raw = as5600.getAngle(); 
     
-    // 1. Limpa o buffer (descarta o comando que o LabVIEW mandou)
-    while(Serial.available() > 0) {
-      Serial.read(); 
+    // Filtro simples para ignorar leitura fantasma de 4095 (359.91)
+    // Se der 4095 exato, é erro e força o anterior ou 0
+    if (raw >= 4095) {
+       // Mantém o anguloAtual como estava ou zera por segurança.
+       anguloAtual = 0.0;
+    } else {
+       anguloAtual = raw * (360.0 / 4096.0);
     }
 
-    // 2. Lê o valor Raw (0-4095)
-    // TENTATIVA 1: Usando o comando do seu código original
-    // Se der erro de "no member named getAngle", troque por "readAngle()"
-    int anguloRaw = as5600.getAngle(); 
+  } else {
+    //SENSOR DESCONECTADO
+    //Força a boca a fechar (0 graus) para não bugar o LabVIEW
+    anguloAtual = 0.0;
+  }
 
-    // 3. Converte para Graus (Fórmula do seu código original)
-    float anguloGraus = anguloRaw * (360.0 / 4096.0);
+  //PARTE 2: LABVIEW
+  if (Serial.available() > 0) {
+    while(Serial.available() > 0) Serial.read(); 
+    Serial.println(anguloAtual, 0); 
+  }
 
-    // 4. Envia para o LabVIEW
-    // IMPORTANTE: O LabVIEW só quer o NÚMERO. 
-    // Removemos os textos "Valor Raw:" e "Graus:" que tinham antes.
-    Serial.println(anguloGraus, 0); // O ",0" envia o número inteiro (arredondado)
+  //PARTE 3: GOOGLE SHEETS
+  if (millis() - ultimoEnvio > 200) { 
+     if(WiFi.status() == WL_CONNECTED){
+        HTTPClient http;
+        // Se o sensor estiver desconectado, envia 0 para o Google
+        float aberturaEstimada = 10.0 * (anguloAtual * 3.14159 / 180.0);
+        String urlFinal = googleURL + "angulo=" + String(anguloAtual) + "&abertura=" + String(aberturaEstimada);
+        
+        http.begin(urlFinal.c_str());
+        http.setFollowRedirects(HTTPC_STRICT_FOLLOW_REDIRECTS);
+        int httpCode = http.GET(); 
+        http.end();
+     }
+     ultimoEnvio = millis(); 
   }
 }
